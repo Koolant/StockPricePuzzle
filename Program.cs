@@ -11,11 +11,15 @@ namespace ConsoleApplication5
         static void Main(string[] args)
         {
             string input = Console.ReadLine();
+            int solution;
+
             int[] pricesArr;
 
             inputParsing(input, out pricesArr);
-            Console.WriteLine(pricesArr.Length);
-            get_max_profit(pricesArr);
+
+            solution = getMaxProfit(pricesArr);
+
+            Console.WriteLine(solution);
 
             Console.ReadLine();
         }
@@ -44,7 +48,7 @@ namespace ConsoleApplication5
         }
 
 
-        public static void get_max_profit(int[] stockPrices)
+        public static int getMaxProfit(int[] stockPrices)
         {
             int diff;
             int answer = 0;
@@ -61,7 +65,7 @@ namespace ConsoleApplication5
                     }
                 }
             }
-            Console.WriteLine(answer);
+            return answer;
         }
         
     }
