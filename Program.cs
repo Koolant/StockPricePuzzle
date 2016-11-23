@@ -10,18 +10,29 @@ namespace ConsoleApplication5
     {
         static void Main(string[] args)
         {
-            string input = Console.ReadLine();
+            string input;
             int solution;
-
             int[] pricesArr;
 
-            inputParsing(input, out pricesArr);
+            while (true)
+            {
+                Console.WriteLine("Please input time indexed stock prices in the following format: x1 x2 x3\r\nType 'exit' to quit.");
 
-            solution = getMaxProfit(pricesArr);
+                input = Console.ReadLine();
+                    
+                if (input == "exit")
+                {
+                    return;
+                }
 
-            Console.WriteLine(solution);
+                inputParsing(input, out pricesArr);
 
-            Console.ReadLine();
+                solution = getMaxProfit(pricesArr);
+
+                Console.WriteLine("\r\nThe maximum profit was: " + solution + "\r\n");
+
+                System.Threading.Thread.Sleep(2000);
+            }
         }
 
         public static void inputParsing(string line, out int[] prices)
@@ -50,22 +61,25 @@ namespace ConsoleApplication5
 
         public static int getMaxProfit(int[] stockPrices)
         {
-            int diff;
-            int answer = 0;
+            int minVal = stockPrices[0];
+            int maxProfit = 0;
 
             for (int i = 0; i < stockPrices.Length; i++)
             {
-                for (int k = i + 1; k < stockPrices.Length; k++)
+                int element = stockPrices[i];
+                    
+                if (element < minVal)
                 {
-                    diff = stockPrices[i] - stockPrices[k];
-
-                    if (answer < diff)
-                    {
-                        answer = diff;
-                    }
+                    minVal = element;
                 }
+
+                if (maxProfit < element - minVal)
+                {
+                    maxProfit = element - minVal;
+                }
+                
             }
-            return answer;
+            return maxProfit;
         }
         
     }
